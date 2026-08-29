@@ -10,9 +10,19 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 dbCon();
+const allowedOrigins = [
+  process.env.LOCAL_FRONTEND_URL,
+  process.env.FRONTEND_URL,
+].filter(Boolean);
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   }),
 );
@@ -20,8 +30,6 @@ app.use(cookieParser());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
 
 const userRouter = require("./src/router/user.router");
 app.use("/api", userRouter);
