@@ -21,8 +21,16 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+
 const userRouter = require("./src/router/user.router");
 app.use("/api", userRouter);
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: true,
+    message: "backend is running ",
+  });
+});
 
 const PORT = process.env.PORT || 3007;
 app.listen(PORT, () => {
