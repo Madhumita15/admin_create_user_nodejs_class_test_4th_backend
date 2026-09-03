@@ -1,4 +1,4 @@
-const app = require("../app");
+const app = require("../src/app");
 const dbCon = require("../src/config/dbCon");
 
 const handler = async (req, res) => {
@@ -12,8 +12,6 @@ const handler = async (req, res) => {
       success: false,
       message: "Database connection failed",
     });
-
-    
   }
 };
 

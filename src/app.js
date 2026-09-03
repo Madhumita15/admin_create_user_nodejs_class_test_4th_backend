@@ -1,21 +1,14 @@
-const dns = require("dns");
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
-
-require("dotenv").config();
-
 const express = require("express");
-const dbCon = require("./src/config/dbCon");
 const app = express();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const router = require('./src/router/index')
+const router = require("./router/index");
 
 
-dbCon();
 const allowedOrigins = [
   process.env.LOCAL_FRONTEND_URL,
   process.env.FRONTEND_URL,
-  "http://localhost:5173"
+  "http://localhost:5173",
 ].filter(Boolean);
 app.use(
   cors({
@@ -34,11 +27,8 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(router);
 
-app.use(router)
 
+module.exports = app
 
-const PORT = process.env.PORT || 3007;
-app.listen(PORT, () => {
-  console.log(`app is listeing on http://localhost:${PORT}`);
-});
