@@ -8,11 +8,14 @@ const dbCon = require("./src/config/dbCon");
 const app = express();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const router = require('./src/router/index')
+
 
 dbCon();
 const allowedOrigins = [
   process.env.LOCAL_FRONTEND_URL,
   process.env.FRONTEND_URL,
+  "http://localhost:5173"
 ].filter(Boolean);
 app.use(
   cors({
@@ -31,14 +34,9 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const userRouter = require("./src/router/user.router");
-app.use("/api", userRouter);
-app.get("/", (req, res) => {
-  res.status(200).json({
-    status: true,
-    message: "backend is running ",
-  });
-});
+
+app.use(router)
+
 
 const PORT = process.env.PORT || 3007;
 app.listen(PORT, () => {
