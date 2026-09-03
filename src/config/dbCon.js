@@ -8,7 +8,8 @@ const dbCon = async () => {
       console.log("MongoDB is not connected");
     }
   } catch (error) {
-    console.log(error);
+    console.error("MongoDB connection error:", error);
+    throw error
   }
 };
 module.exports = dbCon;

@@ -12,6 +12,8 @@ const handler = async (req, res) => {
       success: false,
       message: "Database connection failed",
     });
+
+    
   }
 };
 
