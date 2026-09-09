@@ -4,7 +4,6 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const router = require("./router/index");
 
-
 const allowedOrigins = [
   process.env.LOCAL_FRONTEND_URL,
   process.env.FRONTEND_URL,
@@ -29,6 +28,4 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(router);
 
-
-module.exports = app
-
+module.exports = app;
