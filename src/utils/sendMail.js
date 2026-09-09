@@ -158,7 +158,7 @@ class SendEmail {
 
   static async sendEmailCredentials(user, temporaryPassword) {
     try {
-      const loginUrl = `http://localhost:5173/login`;
+      const loginUrl = `https://admin-create-user-nodejs-class-test-xi.vercel.app/login`;
 
       await transporter.sendMail({
         from: process.env.EMAIL_FROM,
