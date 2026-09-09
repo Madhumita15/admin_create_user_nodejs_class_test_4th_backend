@@ -156,10 +156,9 @@ class SendEmail {
     }
   }
 
-
   static async sendEmailCredentials(user, temporaryPassword) {
     try {
-      const loginUrl = `http://localhost:3007/login`;
+      const loginUrl = `http://localhost:5173/login`;
 
       await transporter.sendMail({
         from: process.env.EMAIL_FROM,
@@ -169,7 +168,6 @@ class SendEmail {
         html: `
       <!DOCTYPE html>
       <html lang="en">
-
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -308,14 +306,14 @@ class SendEmail {
     }
   }
   static async sendPasswordResetMail(user, temporaryPassword) {
-  const loginUrl = `${process.env.FRONTEND_URL}/login`;
+    const loginUrl = `${process.env.FRONTEND_URL}/login`;
 
-  await transporter.sendMail({
-    from: process.env.EMAIL_FROM,
-    to: user.email,
-    subject: "Your Password Has Been Reset",
+    await transporter.sendMail({
+      from: process.env.EMAIL_FROM,
+      to: user.email,
+      subject: "Your Password Has Been Reset",
 
-    html: `
+      html: `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -488,8 +486,8 @@ class SendEmail {
       </body>
       </html>
     `,
-  });
-}
+    });
+  }
 }
 
 module.exports = SendEmail;
